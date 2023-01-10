@@ -2,17 +2,17 @@ package dev.ohoussein.crypto.data.api.mapper
 
 import dev.ohoussein.crypto.data.api.model.CryptoDetailsResponse
 import dev.ohoussein.crypto.data.api.model.TopCryptoResponse
-import dev.ohoussein.crypto.domain.model.DomainCrypto
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoModel
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
 import java.util.*
 import javax.inject.Inject
 
 class ApiDomainModelMapper @Inject constructor(private val locale: Locale) {
 
-    fun convert(data: List<TopCryptoResponse>): List<DomainCrypto> =
+    fun convert(data: List<TopCryptoResponse>): List<CryptoModel> =
         data.mapIndexed { index, item -> convert(item, index) }
 
-    fun convert(data: TopCryptoResponse, index: Int) = DomainCrypto(
+    fun convert(data: TopCryptoResponse, index: Int) = CryptoModel(
         id = data.id,
         symbol = data.symbol,
         name = data.name,
@@ -22,7 +22,7 @@ class ApiDomainModelMapper @Inject constructor(private val locale: Locale) {
         order = index,
     )
 
-    fun convert(data: CryptoDetailsResponse) = DomainCryptoDetails(
+    fun convert(data: CryptoDetailsResponse) = CryptoDetailsModel(
         id = data.id,
         symbol = data.symbol,
         name = data.name,

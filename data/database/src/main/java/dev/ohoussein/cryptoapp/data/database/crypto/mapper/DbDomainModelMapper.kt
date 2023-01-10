@@ -1,16 +1,16 @@
 package dev.ohoussein.cryptoapp.data.database.crypto.mapper
 
-import dev.ohoussein.crypto.domain.model.DomainCrypto
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
+import dev.ohoussein.crypto.domain.model.CryptoModel
 import dev.ohoussein.cryptoapp.data.database.crypto.model.DBCrypto
 import dev.ohoussein.cryptoapp.data.database.crypto.model.DBCryptoDetails
 import javax.inject.Inject
 
 class DbDomainModelMapper @Inject constructor() {
 
-    fun convertDBCrypto(data: List<DBCrypto>): List<DomainCrypto> = data.map { convert(it) }
+    fun convertDBCrypto(data: List<DBCrypto>): List<CryptoModel> = data.map { convert(it) }
 
-    private fun convert(data: DBCrypto) = DomainCrypto(
+    private fun convert(data: DBCrypto) = CryptoModel(
         id = data.id,
         symbol = data.symbol,
         name = data.name,
@@ -20,9 +20,9 @@ class DbDomainModelMapper @Inject constructor() {
         order = data.order,
     )
 
-    fun toDB(domain: List<DomainCrypto>) = domain.map { toDB(it) }
+    fun toDB(domain: List<CryptoModel>) = domain.map { toDB(it) }
 
-    private fun toDB(domain: DomainCrypto) = DBCrypto(
+    private fun toDB(domain: CryptoModel) = DBCrypto(
         id = domain.id,
         symbol = domain.symbol,
         name = domain.name,
@@ -32,7 +32,7 @@ class DbDomainModelMapper @Inject constructor() {
         order = domain.order,
     )
 
-    fun toDomain(cryptoDetails: DBCryptoDetails): DomainCryptoDetails = DomainCryptoDetails(
+    fun toDomain(cryptoDetails: DBCryptoDetails): CryptoDetailsModel = CryptoDetailsModel(
         id = cryptoDetails.id,
         name = cryptoDetails.name,
         symbol = cryptoDetails.symbol,
@@ -46,7 +46,7 @@ class DbDomainModelMapper @Inject constructor() {
         description = cryptoDetails.description,
     )
 
-    fun toDB(cryptoDetails: DomainCryptoDetails): DBCryptoDetails = DBCryptoDetails(
+    fun toDB(cryptoDetails: CryptoDetailsModel): DBCryptoDetails = DBCryptoDetails(
         id = cryptoDetails.id,
         name = cryptoDetails.name,
         symbol = cryptoDetails.symbol,

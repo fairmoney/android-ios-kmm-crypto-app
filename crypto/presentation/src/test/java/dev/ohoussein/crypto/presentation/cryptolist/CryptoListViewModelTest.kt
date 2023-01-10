@@ -2,7 +2,7 @@ package dev.ohoussein.crypto.presentation.cryptolist
 
 import app.cash.turbine.test
 import dev.ohoussein.core.test.extension.TestCoroutineExtension
-import dev.ohoussein.crypto.domain.model.DomainCrypto
+import dev.ohoussein.crypto.domain.model.CryptoModel
 import dev.ohoussein.crypto.domain.usecase.GetTopCryptoList
 import dev.ohoussein.crypto.presentation.mapper.DomainModelMapper
 import dev.ohoussein.crypto.presentation.model.Crypto
@@ -49,7 +49,7 @@ class CryptoListViewModelTest : DescribeSpec({
     }
 
     describe("mocked data") {
-        val data: List<DomainCrypto> = mock()
+        val data: List<CryptoModel> = mock()
         val uiData: List<Crypto> = mock()
 
         whenever(uiMapper.convert(data)).thenReturn(uiData)

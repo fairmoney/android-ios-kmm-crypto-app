@@ -1,6 +1,6 @@
 package dev.ohoussein.crypto.domain.model
 
-data class DomainCrypto(
+data class CryptoModel(
     val id: String,
     val name: String,
     val imageUrl: String,
@@ -10,7 +10,7 @@ data class DomainCrypto(
     val order: Int,
 )
 
-data class DomainCryptoDetails(
+data class CryptoDetailsModel(
     val id: String,
     val name: String,
     val symbol: String,

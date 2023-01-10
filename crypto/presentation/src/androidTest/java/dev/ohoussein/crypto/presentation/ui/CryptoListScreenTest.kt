@@ -18,7 +18,7 @@ import dagger.hilt.android.testing.UninstallModules
 import dev.ohoussein.core.test.activity.TestActivity
 import dev.ohoussein.core.test.mock.TestDataFactory
 import dev.ohoussein.crypto.data.di.CryptoDataModule
-import dev.ohoussein.crypto.domain.model.DomainCrypto
+import dev.ohoussein.crypto.domain.model.CryptoModel
 import dev.ohoussein.crypto.domain.repo.ICryptoRepository
 import dev.ohoussein.crypto.presentation.NavPath
 import dev.ohoussein.crypto.presentation.testutil.TestNavHost
@@ -128,14 +128,14 @@ class CryptoListScreenTest {
         }
     }
 
-    private fun givenListOfCrypto(next: (List<DomainCrypto>) -> Unit) {
+    private fun givenListOfCrypto(next: (List<CryptoModel>) -> Unit) {
         val data = TestDataFactory.makeCryptoList(20)
         whenever(cryptoRepo.getTopCryptoList())
             .thenReturn(flowOf(data))
         next(data)
     }
 
-    private fun givenErrorOnRefreshListOfCrypto(next: (List<DomainCrypto>) -> Unit) {
+    private fun givenErrorOnRefreshListOfCrypto(next: (List<CryptoModel>) -> Unit) {
         val successData = TestDataFactory.makeCryptoList(20)
         runBlocking {
             whenever(cryptoRepo.refreshTopCryptoList())
@@ -144,8 +144,8 @@ class CryptoListScreenTest {
         next(successData)
     }
 
-    private fun givenErrorThanSuccessGetListOfCrypto(next: (List<DomainCrypto>) -> Unit) {
-        val flow = MutableSharedFlow<List<DomainCrypto>>()
+    private fun givenErrorThanSuccessGetListOfCrypto(next: (List<CryptoModel>) -> Unit) {
+        val flow = MutableSharedFlow<List<CryptoModel>>()
         val successData = TestDataFactory.makeCryptoList(20)
         whenever(cryptoRepo.getTopCryptoList()).thenReturn(flow)
         runBlocking {
@@ -156,7 +156,7 @@ class CryptoListScreenTest {
         next(successData)
     }
 
-    private fun thenCryptoListShouldBeDisplayed(data: List<DomainCrypto>) {
+    private fun thenCryptoListShouldBeDisplayed(data: List<CryptoModel>) {
         data.forEachIndexed { index, item ->
             thenCryptoItemShouldBeDisplayed(item)
             composeTestRule.onNodeWithTag(CryptoListTestTag)
@@ -164,7 +164,7 @@ class CryptoListScreenTest {
         }
     }
 
-    private fun thenCryptoItemShouldBeDisplayed(item: DomainCrypto) {
+    private fun thenCryptoItemShouldBeDisplayed(item: CryptoModel) {
         composeTestRule.onNodeWithText(
             item.name,
             useUnmergedTree = true

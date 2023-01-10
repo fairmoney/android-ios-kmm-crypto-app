@@ -6,8 +6,8 @@ import dev.ohoussein.crypto.data.api.mapper.ApiDomainModelMapper
 import dev.ohoussein.crypto.data.api.model.CryptoDetailsResponse
 import dev.ohoussein.crypto.data.api.model.TopCryptoResponse
 import dev.ohoussein.crypto.data.repository.CryptoRepository
-import dev.ohoussein.crypto.domain.model.DomainCrypto
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoModel
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
 import dev.ohoussein.crypto.domain.repo.ICryptoRepository
 import dev.ohoussein.cryptoapp.data.database.crypto.dao.CryptoDAO
 import dev.ohoussein.cryptoapp.data.database.crypto.mapper.DbDomainModelMapper
@@ -43,7 +43,7 @@ class CryptoRepositoryTest : BehaviorSpec({
 
     given("a list crypto from database") {
         val dbCryptoList = listOf<DBCrypto>(mock(), mock())
-        val domainData = listOf<DomainCrypto>(mock(), mock())
+        val domainData = listOf<CryptoModel>(mock(), mock())
 
         whenever(cryptoDAO.getAll()).thenReturn(flowOf(dbCryptoList))
         whenever(dbDomainModelMapper.convertDBCrypto(dbCryptoList)).thenReturn(domainData)
@@ -62,7 +62,7 @@ class CryptoRepositoryTest : BehaviorSpec({
 
     given("list of crypto from api") {
         val cryptoList = listOf<TopCryptoResponse>(mock(), mock())
-        val domainData = listOf<DomainCrypto>(mock(), mock())
+        val domainData = listOf<CryptoModel>(mock(), mock())
         val dbCryptoList = mock<List<DBCrypto>>()
 
         whenever(apiService.getTopCrypto(currency)).thenReturn(cryptoList)
@@ -86,7 +86,7 @@ class CryptoRepositoryTest : BehaviorSpec({
 
     given("a crypto details from database") {
         val dbCrypto = mock<DBCryptoDetails>()
-        val domainData = mock<DomainCryptoDetails>()
+        val domainData = mock<CryptoDetailsModel>()
         whenever(cryptoDAO.getCryptoDetails(cryptoId)).thenReturn(flowOf(dbCrypto))
         whenever(dbDomainModelMapper.toDomain(dbCrypto)).thenReturn(domainData)
 
@@ -104,7 +104,7 @@ class CryptoRepositoryTest : BehaviorSpec({
 
     given("a crypto details from api") {
         val apiResponse = mock<CryptoDetailsResponse>()
-        val domainData = mock<DomainCryptoDetails>()
+        val domainData = mock<CryptoDetailsModel>()
         val dbCrypto = mock<DBCryptoDetails>()
         whenever(apiService.getCryptoDetails(cryptoId)).thenReturn(apiResponse)
         whenever(apiDomainModelMapper.convert(apiResponse)).thenReturn(domainData)

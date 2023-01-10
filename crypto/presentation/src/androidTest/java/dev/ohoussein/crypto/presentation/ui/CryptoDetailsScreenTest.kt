@@ -17,7 +17,7 @@ import dagger.hilt.android.testing.UninstallModules
 import dev.ohoussein.core.test.activity.TestActivity
 import dev.ohoussein.core.test.mock.TestDataFactory
 import dev.ohoussein.crypto.data.di.CryptoDataModule
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
 import dev.ohoussein.crypto.domain.repo.ICryptoRepository
 import dev.ohoussein.crypto.presentation.NavPath
 import dev.ohoussein.crypto.presentation.testutil.TestNavHost
@@ -117,7 +117,7 @@ class CryptoDetailsScreenTest {
         next(composeTestRule)
     }
 
-    private fun givenCrypto(next: (DomainCryptoDetails) -> Unit) {
+    private fun givenCrypto(next: (CryptoDetailsModel) -> Unit) {
         val data = TestDataFactory.randomCryptoDetails(cryptoId)
         whenever(cryptoRepo.getCryptoDetails(cryptoId))
             .thenReturn(flowOf(data))
@@ -125,7 +125,7 @@ class CryptoDetailsScreenTest {
     }
 
     private fun givenErrorAndSuccessRefresh(next: () -> Unit) {
-        val flow = MutableSharedFlow<DomainCryptoDetails>()
+        val flow = MutableSharedFlow<CryptoDetailsModel>()
         val successData = TestDataFactory.randomCryptoDetails(cryptoId)
         whenever(cryptoRepo.getCryptoDetails(cryptoId)).thenReturn(flow)
         runBlocking {
@@ -136,7 +136,7 @@ class CryptoDetailsScreenTest {
         next()
     }
 
-    private fun thenCryptoDetailsShouldBeDisplayed(item: DomainCryptoDetails) {
+    private fun thenCryptoDetailsShouldBeDisplayed(item: CryptoDetailsModel) {
         with(composeTestRule) {
             onNode(hasText(item.name, ignoreCase = true, substring = true)).assertIsDisplayed()
             onNode(hasText(item.description, ignoreCase = true)).assertIsDisplayed()

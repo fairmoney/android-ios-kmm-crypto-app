@@ -1,7 +1,7 @@
 package dev.ohoussein.crypto.presentation.mapper
 
-import dev.ohoussein.crypto.domain.model.DomainCrypto
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
+import dev.ohoussein.crypto.domain.model.CryptoModel
 import dev.ohoussein.crypto.presentation.model.BaseCrypto
 import dev.ohoussein.crypto.presentation.model.Crypto
 import dev.ohoussein.crypto.presentation.model.CryptoDetails
@@ -20,12 +20,12 @@ class DomainModelMapper @Inject constructor(
     private val percentFormatter: PercentFormatter,
     @Named(Qualifier.CURRENCY) private val currency: String,
 ) {
-    fun convert(domain: List<DomainCrypto>): List<Crypto> {
+    fun convert(domain: List<CryptoModel>): List<Crypto> {
         return domain.map { convert(it) }
     }
 
     @Suppress("MagicNumber")
-    private fun convert(domain: DomainCrypto): Crypto {
+    private fun convert(domain: CryptoModel): Crypto {
         return Crypto(
             base = BaseCrypto(
                 id = domain.id,
@@ -42,7 +42,7 @@ class DomainModelMapper @Inject constructor(
         )
     }
 
-    fun convert(domain: DomainCryptoDetails) =
+    fun convert(domain: CryptoDetailsModel) =
         CryptoDetails(
             base = BaseCrypto(
                 id = domain.id,

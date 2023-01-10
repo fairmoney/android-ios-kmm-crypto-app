@@ -1,6 +1,6 @@
 package dev.ohoussein.cryptoapp.domain.usecase
 
-import dev.ohoussein.crypto.domain.model.DomainCrypto
+import dev.ohoussein.crypto.domain.model.CryptoModel
 import dev.ohoussein.crypto.domain.repo.ICryptoRepository
 import dev.ohoussein.crypto.domain.usecase.GetTopCryptoList
 import io.kotest.core.spec.style.BehaviorSpec
@@ -15,7 +15,7 @@ class GetTopCryptoListTest : BehaviorSpec({
     val getTopCryptoList = GetTopCryptoList(cryptoRepository)
 
     given("a getTopCryptoList answer") {
-        val data = mock<List<DomainCrypto>>()
+        val data = mock<List<CryptoModel>>()
         whenever(cryptoRepository.getTopCryptoList())
             .thenReturn(flowOf(data))
 

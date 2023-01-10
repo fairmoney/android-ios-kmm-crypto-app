@@ -5,7 +5,7 @@ package dev.ohoussein.crypto.presentation.cryptolist
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import dev.ohoussein.core.test.extension.TestCoroutineExtension
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
 import dev.ohoussein.crypto.domain.usecase.GetCryptoDetails
 import dev.ohoussein.crypto.presentation.NavPath.CryptoDetailsPath
 import dev.ohoussein.crypto.presentation.mapper.DomainModelMapper
@@ -59,7 +59,7 @@ class CryptoDetailsViewModelTest : DescribeSpec({
     }
 
     describe("mocked data") {
-        val data: DomainCryptoDetails = mock()
+        val data: CryptoDetailsModel = mock()
         val uiData: CryptoDetails = mock()
 
         whenever(uiMapper.convert(data)).thenReturn(uiData)

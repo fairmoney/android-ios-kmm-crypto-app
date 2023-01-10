@@ -1,7 +1,7 @@
 package dev.ohoussein.crypto.presentation.mapper
 
-import dev.ohoussein.crypto.domain.model.DomainCrypto
-import dev.ohoussein.crypto.domain.model.DomainCryptoDetails
+import dev.ohoussein.crypto.domain.model.CryptoDetailsModel
+import dev.ohoussein.crypto.domain.model.CryptoModel
 import dev.ohoussein.crypto.presentation.model.BaseCrypto
 import dev.ohoussein.crypto.presentation.model.Crypto
 import dev.ohoussein.crypto.presentation.model.CryptoDetails
@@ -31,10 +31,10 @@ class DomainModelMapperTest : BehaviorSpec({
         currency = currency,
     )
 
-    given("a List<DomainCrypto>") {
+    given("a List<CryptoModel>") {
 
         val crypto = listOf(
-            DomainCrypto(
+            CryptoModel(
                 id = "1",
                 name = "Bitcoin",
                 imageUrl = "https://bitcoin.com",
@@ -63,9 +63,9 @@ class DomainModelMapperTest : BehaviorSpec({
         }
     }
 
-    given("a DomainCryptoDetails") {
+    given("a CryptoDetailsModel") {
 
-        val crypto = DomainCryptoDetails(
+        val crypto = CryptoDetailsModel(
             id = "1",
             name = "Bitcoin",
             imageUrl = "https://bitcoin.com",
